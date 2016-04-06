@@ -1,0 +1,21 @@
+﻿.user-search-result {
+    position: relative;
+    border-bottom: 1px solid transparent;
+}
+
+    .user-search-result:hover {
+        border-bottom: 1px solid whitesmoke;
+        cursor: pointer;
+    }
+
+    .user-search-result .search-right-bar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 5px;
+        background-color: green;
+        margin-right: .9375rem;
+
+        display: none;
+    }

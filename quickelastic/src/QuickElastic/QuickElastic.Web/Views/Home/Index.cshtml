@@ -1,0 +1,58 @@
+﻿<div id="search-wrapper">
+    <div class="row">
+        <div id="search-input" class="column small-10" style="margin: 25px 0;">
+            <input type="text" onkeyup="search(this.value)" placeholder="Try me... "/>
+        </div>
+
+        <div class="column small-2" style="margin: 25px 0;">
+            <a class="button large" href="@Url.Action("Lucky", "User")">I'm feeling lucky</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="search-results">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#search-input input').val('');
+    });
+
+    var lastSearchInput = '';
+
+    function search(searchInput) {
+        if (searchInput === lastSearchInput)
+            return;
+
+        $.ajax({
+            url: '@Url.Content("~/api/search/users")?text=' + searchInput
+        }).done(function (users) {
+            if (users.length) {
+                $('#search-results').html('');
+            } else {
+                $('#search-results').html('<div class="column">No users found :(</div>');
+            }
+
+            lastSearchInput = searchInput;
+
+            users.forEach(function (user) {
+                var userEl = $('<div data-id="' + user.Id + '" class="user-search-result column"><h3>' + user.Name + '</h3> <p>' + user.Username + '<br><small>' + user.Email + '</small>' + '</p><div class="search-right-bar"></div></div>');
+                userEl.appendTo('#search-results');
+                userEl.hover(function () {
+                    $(this).find('.search-right-bar').show();
+                }, function() {
+                    $(this).find('.search-right-bar').hide();
+                });
+
+                userEl.click(function() {
+                    var userId = $(this).data('id');
+
+                    window.location.href = '@Url.Action("Detail", "User")' + '/' + userId;
+                });
+            });
+        });
+    };
+</script>

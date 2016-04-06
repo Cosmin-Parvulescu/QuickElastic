@@ -1,0 +1,27 @@
+﻿@model QuickElastic.Core.Domain.User
+
+<div class="row">
+    <div class="small-4 columns small-centered" style="text-align: center;">
+        <h3>@Model.FirstName @Model.LastName</h3>
+        <img class="thumbnail" src="@Model.AvatarUrl"/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-4 columns small-centered" style="text-align: center;">
+        <p>@Model.DateOfBirth.ToShortDateString()</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-4 columns small-centered" style="text-align: center;">
+        <h3>@Model.Username</h3>
+        <p>@Model.Email</p>
+
+        <p>
+            <a href="#">@Model.Website</a>
+        </p>
+
+        <p>@Model.Phone</p>
+    </div>
+</div>
